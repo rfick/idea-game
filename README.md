@@ -21,19 +21,19 @@ you, whilst avoiding being sucked into the nearby black hole.
     **Fork** button. Now you have a copy of the repository under your
     Github account.
 
-3.  Now you need to "clone" your forked repository to your computer. You
+3.  Now you need to **clone** your forked repository to your computer. You
     can do this through Github for Windows, or you can open the git
     shell, `cd` to a suitable location, and do
 
         $ git clone <repository>
 
     where `<repository>` is something like
-    `git@github.com:<username>/<reponame>` (this is given on the Github
+    `git@github.com:<username>/<reponame>` (this is shown on the Github
     page for your repository). This will create a new directory with the
     same name as the repository.
 
-4.  Add the `upstream` remote. You'll have to use the git shell to do
-    this.
+4.  Add the `upstream` remote. I think you have to use the git shell to
+    do this.
 
         $ git remote add upstream git://github.com/kalgynirae/idea-game.git
 
