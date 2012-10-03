@@ -32,35 +32,88 @@ you, whilst avoiding being sucked into the nearby black hole.
     page for your repository). This will create a new directory with the
     same name as the repository.
 
+4.  Add the `upstream` remote. You'll have to use the git shell to do
+    this.
+
+        $ git remote add upstream git://github.com/kalgynirae/idea-game.git
+
 ### Git basics
+
+Your best friend:
+
+    $ git status
 
 #### Staging and committing
 
 After you've made changes to files in the repository, you have to
-*stage* and then *commit* the changes.  The staging process exists so
-that you can commit only some files or certain parts of files that have
-changes. For example, if you change File A and File B, but the changes
-are unrelated and would make more sense in separate commits, you can
-stage File A only and commit, and then stage File B and commit again.
+*stage* and then *commit* the changes.
+
+**Staging** lets you specify exactly which changes you want to commit.
+For example, if you change File A and File B, but the changes are
+unrelated and would make more sense in separate commits, you can stage
+File A, commit, and then stage File B and commit again. Usually you'll
+stage entire files, but it's also possible to stage only parts of files.
 
 In the git shell, you can stage files like this:
 
     $ git add <files>
 
-Committing is the process of packaging up the changes you've made with a
-message that explains them. Git commit titles should be written in the
-present imperative and should be 55 characters or fewer. (examples: `Add
-Run/Stop buttons`, `Fix bug #4453`, and `Add a new character sprite`)
-More detailed information can be included in the description.
+To see what files have been changed and what files are currently staged,
+use:
+
+    $ git status
+
+To see what has changed in a particular file:
+
+    $ git diff <file>
+
+**Committing** is the process of packaging up the changes you've made
+with a message that explains them.
 
 Commiting is done in the git shell like this:
 
-    $ git commit -m "<title>"
+    $ git commit
+
+This will open a text editor so that you can enter your commit message.
+Once you save the file and quit the editor, git will record the commit.
+If you want to cancel the commit, you can exit the editor without saving
+the file.
+
+Git commit messages consist of a required short title
+(written in the imperative voice, max 55 characters) and an optional
+longer description.
+
+Commits in git are identified by a hexidecimal hash. The hashes are
+quite long, but in most cases you can use just the first 6 or 7 characters of
+the hash.
+
+To see the log of previous commits and their hashes:
+
+    $ git log
+    $ git log --oneline
 
 #### Branches
 
-Git stores repository configuration and metadata in a special directory
-named `.git` inside the repository folder.
+The default branch in a git repository is called `master`.
+
+To list the branches in your local repository or to see which branch you
+currently have checked out, you can do:
+
+    $ git branch
+
+If you also want to see local copies of remote branches:
+
+    $ git branch -a
+
+To switch to a branch:
+
+    $ git checkout <branch name>
+
+To make a new branch:
+
+    $ git checkout -b <branch name>
+
+### Using git to work on the game
 
 [1]: https://github.com/
 [2]: http://windows.github.com/
