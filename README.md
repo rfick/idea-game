@@ -8,7 +8,30 @@ The theme is "unicorns and leprechauns in space".
 ### Gameplay synopsis
 
 Kill the dangerous unicorns and leprechauns, who are trying to murder
-you, whilst avoiding being sucked into the nearby black hole.
+you, whilst avoiding being sucked into the nearby black hole. Some
+enemies drop parts to your ship, which you must grab in order to rebuild
+your ship and escape. Once you escape, you end up (a) running into
+another black hole, (b) having a faulty ship, (c) being attacked by
+leprechauns, or (d) etc., and this causes you to have to repair your
+ship again (AKA NEXT LEVEL).
+
+You
+
+*   are floating in space, stranded because your ship broke
+*   have a jet pack, so you can move around in space
+*   are trying to rebuild your ship so you can escape
+
+Various enemies
+
+*   Leprechauns that throw coins at you
+*   Unicorns that charge at you
+*   ...
+
+The black hole
+
+*   constantly sucks things toward it
+*   occasionally shifts to wormhole mode and shoots out possibly useful
+    debris
 
 ## How to use Git and Github
 
