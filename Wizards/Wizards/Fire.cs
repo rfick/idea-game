@@ -24,18 +24,32 @@ namespace Wizards
         State mCurrentState = State.Walking;
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
+        float angle;
 
         public Fire(Vector2 pos, Vector2 pos2)
         {
             START_POSITION_X = (int)pos.X;
             START_POSITION_Y = (int)pos.Y;
             mDirection = pos2 - pos;
-            //float mDirectionLength = (float)(Math.Sqrt(mDirection.X * mDirection.X + mDirection.Y * mDirection.Y));
-            //mDirection = mDirection / mDirectionLength;
-            mSpeed.X = 1;
-            mSpeed.Y = 1;
-            //mSpeed.X = WIZARD_SPEED;
-            //mSpeed.Y = WIZARD_SPEED;
+            float mDirectionLength = (float)(Math.Sqrt(mDirection.X * mDirection.X + mDirection.Y * mDirection.Y));
+            mDirection = mDirection / mDirectionLength;
+            mSpeed.X = WIZARD_SPEED;
+            mSpeed.Y = WIZARD_SPEED;
+            calcAngle();
+        }
+
+        private void calcAngle()
+        {
+            Vector2 reference;
+            float temp;
+            reference.X = 1;
+            reference.Y = 0;
+            temp = (reference.X * mDirection.X) + (reference.Y * mDirection.Y);
+            angle = (float)Math.Acos(temp);
+            if (reference.Y-mDirection.Y > 0)
+            {
+                angle = (float)((2*Math.PI) - angle);
+            }
         }
 
         public void LoadContent(ContentManager theContentManager)
@@ -47,7 +61,7 @@ namespace Wizards
 
         public void Update(GameTime theGameTime)
         {
-            base.Update(theGameTime, mSpeed, mDirection);
+            base.Update(theGameTime, mSpeed, mDirection, angle);
         }
 
     }
