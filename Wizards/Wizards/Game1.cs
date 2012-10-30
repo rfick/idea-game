@@ -25,7 +25,7 @@ namespace Wizards
         TimeSpan totalForFireElapsed;
         TimeSpan minForSpawn = TimeSpan.FromMilliseconds(5000);
         TimeSpan totalForSpawnElapsed;
-        Knight player = new Knight();
+        Player player = new Player();
         MouseIcon mMouseIconSprite = new MouseIcon();
 
         public Game1()
@@ -45,7 +45,7 @@ namespace Wizards
             // TODO: Add your initialization logic here
             //balls.Add(new Knight());
             //balls.Add(new MouseIcon());
-            player = new Knight();
+            player = new Player();
             mMouseIconSprite = new MouseIcon();
             totalForFireElapsed = TimeSpan.FromMilliseconds(200);
             totalForSpawnElapsed = TimeSpan.Zero;
@@ -107,6 +107,27 @@ namespace Wizards
             removeLostBalls();
             checkFireEnemyCollision();
             base.Update(gameTime);
+        }
+
+        private void checkPlayerEnemyCollision()
+        {
+            Rectangle playerRec = new Rectangle();
+            Rectangle enemyRec = new Rectangle();
+            playerRec.X = (int)player.Position.X;
+            playerRec.Y = (int)player.Position.Y;
+            playerRec.Width = (int)(player.Size.Width*0.8f);
+            playerRec.Height = (int)(player.Size.Height*0.8f);
+            foreach (Enemy a in enemies)
+            {
+                enemyRec.X = (int)a.Position.X;
+                enemyRec.Y = (int)a.Position.Y;
+                enemyRec.Width = a.Size.Width;
+                enemyRec.Height = a.Size.Height;
+                if(playerRec.Intersects(enemyRec))
+                {
+                    //decrement player's health
+                }
+            }
         }
 
         private void checkFireEnemyCollision()

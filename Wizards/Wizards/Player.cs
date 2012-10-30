@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Wizards
 {
-    class Knight : Sprite
+    class Player : Sprite
     {
         const string WIZARD_ASSETNAME = "Knight";
         const int START_POSITION_X = 0;
@@ -41,7 +41,27 @@ namespace Wizards
             KeyboardState aCurrentKeyboardState = Keyboard.GetState();
             UpdateMovement(aCurrentKeyboardState);
             mPreviousKeyboardState = aCurrentKeyboardState;
-            base.Update(theGameTime, mSpeed, mDirection, graphics);
+
+            // Do the position calculation and bound the player on the screen:
+            Vector2 nextPos = Position;
+            nextPos += mDirection * mSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
+            if (nextPos.X < 0)
+            {
+                nextPos.X = 0;
+            }
+            if (nextPos.Y < 0)
+            {
+                nextPos.Y = 0;
+            }
+            if ((nextPos.X + Size.Width) > graphics.GraphicsDevice.Viewport.Width)
+            {
+                nextPos.X = graphics.GraphicsDevice.Viewport.Width - Size.Width;
+            }
+            if ((nextPos.Y + Size.Height) > graphics.GraphicsDevice.Viewport.Height)
+            {
+                nextPos.Y = graphics.GraphicsDevice.Viewport.Height - Size.Height;
+            }
+            Position = nextPos;
         }
 
         private void UpdateMovement(KeyboardState aCurrentKeyboardState)

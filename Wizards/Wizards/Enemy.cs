@@ -53,7 +53,12 @@ namespace Wizards
             mDirection = playerPos - adjsPos;
             float mDirectionLength = (float)(Math.Sqrt(mDirection.X * mDirection.X + mDirection.Y * mDirection.Y));
             mDirection = mDirection / mDirectionLength;
-            base.Update(theGameTime, mSpeed, mDirection, angle);
+
+            // Update enemy position
+            Vector2 nextPos = Position;
+            nextPos += mDirection * mSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
+            Position = nextPos;
+            base.Angle = angle;
         }
 
     }

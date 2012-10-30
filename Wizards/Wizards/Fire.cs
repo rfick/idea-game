@@ -26,11 +26,12 @@ namespace Wizards
         Vector2 mSpeed = Vector2.Zero;
         float angle;
 
-        public Fire(Vector2 pos, Vector2 pos2)
+        public Fire(Vector2 player, Vector2 mousePos)
         {
-            START_POSITION_X = (int)pos.X;
-            START_POSITION_Y = (int)pos.Y;
-            mDirection = pos2 - pos;
+            // Calculate fireball's starting position and direction based on where the player and mouse are.
+            START_POSITION_X = (int)player.X;
+            START_POSITION_Y = (int)player.Y;
+            mDirection = mousePos - player;
             float mDirectionLength = (float)(Math.Sqrt(mDirection.X * mDirection.X + mDirection.Y * mDirection.Y));
             mDirection = mDirection / mDirectionLength;
             mSpeed.X = WIZARD_SPEED;
@@ -38,6 +39,7 @@ namespace Wizards
             calcAngle();
         }
 
+        // Calculate the angle the fireball is going relative to 0 degrees.
         private void calcAngle()
         {
             Vector2 reference;
@@ -61,7 +63,10 @@ namespace Wizards
 
         public void Update(GameTime theGameTime)
         {
-            base.Update(theGameTime, mSpeed, mDirection, angle);
+            Vector2 nextPos = Position;
+            nextPos += mDirection * mSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
+            Position = nextPos;
+            base.Angle = angle;
         }
 
     }
