@@ -44,22 +44,26 @@ namespace Wizards
 
             // Do the position calculation and bound the player on the screen:
             Vector2 nextPos = Position;
-            nextPos += mDirection * mSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
+            nextPos += mSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
             if (nextPos.X < 0)
             {
                 nextPos.X = 0;
+                mSpeed.X = 0;
             }
             if (nextPos.Y < 0)
             {
                 nextPos.Y = 0;
+                mSpeed.Y = 0;
             }
             if ((nextPos.X + Size.Width) > graphics.GraphicsDevice.Viewport.Width)
             {
                 nextPos.X = graphics.GraphicsDevice.Viewport.Width - Size.Width;
+                mSpeed.X = 0;
             }
             if ((nextPos.Y + Size.Height) > graphics.GraphicsDevice.Viewport.Height)
             {
                 nextPos.Y = graphics.GraphicsDevice.Viewport.Height - Size.Height;
+                mSpeed.Y = 0;
             }
             Position = nextPos;
         }
@@ -68,27 +72,33 @@ namespace Wizards
         {
             if (mCurrentState == State.Walking)
             {
-                mSpeed = Vector2.Zero;
-                mDirection = Vector2.Zero;
                 if (aCurrentKeyboardState.IsKeyDown(Keys.A) == true)
                 {
-                    mSpeed.X = WIZARD_SPEED;
-                    mDirection.X = MOVE_LEFT;
+                    if (Math.Abs(mSpeed.X) < WIZARD_SPEED)
+                    {
+                        mSpeed.X -= 0.01f * WIZARD_SPEED;
+                    }
                 }
                 else if (aCurrentKeyboardState.IsKeyDown(Keys.D) == true)
                 {
-                    mSpeed.X = WIZARD_SPEED;
-                    mDirection.X = MOVE_RIGHT;
+                    if (Math.Abs(mSpeed.X) < WIZARD_SPEED)
+                    {
+                        mSpeed.X += 0.01f * WIZARD_SPEED;
+                    }
                 }
                 if (aCurrentKeyboardState.IsKeyDown(Keys.W) == true)
                 {
-                    mSpeed.Y = WIZARD_SPEED;
-                    mDirection.Y = MOVE_UP;
+                    if (Math.Abs(mSpeed.Y) < WIZARD_SPEED)
+                    {
+                        mSpeed.Y -= 0.01f * WIZARD_SPEED;
+                    }
                 }
                 else if (aCurrentKeyboardState.IsKeyDown(Keys.S) == true)
                 {
-                    mSpeed.Y = WIZARD_SPEED;
-                    mDirection.Y = MOVE_DOWN;
+                    if (Math.Abs(mSpeed.Y) < WIZARD_SPEED)
+                    {
+                        mSpeed.Y += 0.01f * WIZARD_SPEED;
+                    }
                 }
             }
         }
